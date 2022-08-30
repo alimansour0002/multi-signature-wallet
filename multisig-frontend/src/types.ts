@@ -1,0 +1,1 @@
+export type PendingListType = number | string | boolean;
