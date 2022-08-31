@@ -30,10 +30,8 @@ const Home: NextPage = () => {
     const db = collection(database, "Favorites");
     const userDoc = doc(db, accountData?.address);
     getDoc(userDoc).then((docc) => {
-      // const newUserWallets=(docc.data).values();
       const data = docc.data();
       if (!data) return;
-      console.log('data', Object.values(data));
       setUserWallets(Object.values(data));
     }
     )
@@ -71,23 +69,23 @@ const Home: NextPage = () => {
       return;
     }
     const walletAddress = await deploy(signers, owner);
+    setSigners([]);
     const db = collection(database, "Favorites");
     const arr = signers;
     const addToDb = async (elem: string | undefined) => {
       await setDoc(doc(db, elem),
-        { [accountData?.address]: walletAddress }, { merge: true }
+        { [walletAddress]: walletAddress }, { merge: true }
       );
     }
     arr.forEach((elem) => {
       addToDb(elem);
       addToDb(accountData?.address);
     });
-    if (!accountData?.address) return;
-    const userDoc = doc(db, accountData?.address);
-    const newUserWallets = await getDoc(userDoc);
-    console.log(newUserWallets);
+    // if (!accountData?.address) return;
+    // const userDoc = doc(db, accountData?.address);
+    // const newUserWallets = await getDoc(userDoc);
+    // console.log('newwallets',newUserWallets);
     setRefresh((refresh) => !refresh);
-
   }
   return (
     <div className={styles.container}>
