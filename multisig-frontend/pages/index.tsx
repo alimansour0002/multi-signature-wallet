@@ -63,7 +63,7 @@ const Home: NextPage = () => {
       }
     </div>
   }
-  const creatWallet = async () => {
+  const createWallet = async () => {
     if (!accountData?.address) {
       alert('your wallet is not connected');
       return;
@@ -116,7 +116,7 @@ const Home: NextPage = () => {
             )
           })}
         </div>
-        <h4>or creat new wallet</h4>
+        <h4>or create new wallet</h4>
         <input onChange={(event) => setNewSigner(event.target.value)}
           value={newSigner}
         >
@@ -125,8 +125,8 @@ const Home: NextPage = () => {
           add signer
         </button>
         {Signers()}
-        <button onClick={creatWallet}>
-          creat Wallet
+        <button onClick={createWallet}>
+          create Wallet
         </button>
         
       </div>}
