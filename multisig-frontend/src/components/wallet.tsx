@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 import { useSigner } from 'wagmi';
 import { ethers, Signer } from 'ethers';
 import { PendingListType } from '../types';
+import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 export default function Wallet({ contractAddress }: { contractAddress: string }) {
+    console.log('ff', contractAddress)
     const contract = useMultisigContract(contractAddress);
     const [pendingList, setPendingList] = useState<PendingListType[][]>([]);
     const [address, setAddress] = useState('');
@@ -12,6 +14,9 @@ export default function Wallet({ contractAddress }: { contractAddress: string })
     const [NumberofSigners, setNumberofSigners] = useState();
     const { data: signer } = useSigner();
     const [isSigner,setIsSigner]= useState(false);
+    useEffect(()=>{
+        console.log('address',contractAddress);
+    },[contractAddress])
     useEffect(()=>{
         const getIndex = async () =>{
             if(!contract)return;
@@ -21,6 +26,7 @@ export default function Wallet({ contractAddress }: { contractAddress: string })
         getIndex();
     },[signer])
     useEffect(() => {
+        console.log('heyy');
         const getPending = async () => {
             if (!contract) return;
             let newList: PendingListType[][] = [];
@@ -82,7 +88,11 @@ export default function Wallet({ contractAddress }: { contractAddress: string })
             </tbody>
         </table>
     }
-
+    if(!contract){
+        return (
+            <></>
+        )
+    }
     return (
         <>
             <div>

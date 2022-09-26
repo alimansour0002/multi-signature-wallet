@@ -1,13 +1,9 @@
-import { SocketAddress } from 'net'
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import ConnectWallet from '../src/components/connect_wallet'
-import { useMultisigContract } from '../src/hooks/useMultisigContract'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link';
-import Router from 'next/router'
 import { useRouter } from 'next/router'
-import { sign } from 'crypto'
 import { collection, setDoc, doc, getDoc } from 'firebase/firestore'
 import { database } from '../src/utils/firebaseConfig'
 import { useAccount, useSigner } from 'wagmi'
@@ -40,6 +36,7 @@ const Home: NextPage = () => {
     router.push(add);
   }
   const addSigner = () => {
+    if (newSigner == '') return;
     const newArr = [...signers, newSigner];
     setNewSigner('');
     setSigners(newArr);
@@ -81,10 +78,6 @@ const Home: NextPage = () => {
       addToDb(elem);
       addToDb(accountData?.address);
     });
-    // if (!accountData?.address) return;
-    // const userDoc = doc(db, accountData?.address);
-    // const newUserWallets = await getDoc(userDoc);
-    // console.log('newwallets',newUserWallets);
     setRefresh((refresh) => !refresh);
   }
   return (
@@ -128,10 +121,9 @@ const Home: NextPage = () => {
         <button onClick={createWallet}>
           create Wallet
         </button>
-        
+
       </div>}
     </div>
   )
 }
-
-export default Home
+export default Home;
