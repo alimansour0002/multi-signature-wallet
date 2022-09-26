@@ -1,2 +1,2 @@
 # multi-signature-wallet
-This is a multi-signature-wallet dapp.
+This is a multi-signature-wallet DApp.
