@@ -13,4 +13,5 @@ contract.
 Firebase is used to store a mapping between users and their wallets.
 
 Frontend: Next.js
+
 Blockchain: Solidity
