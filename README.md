@@ -11,3 +11,6 @@ This UI is responsible for creating wallets (deploying a smart contract wallet f
 contract.
 
 Firebase is used to store a mapping between users and their wallets.
+
+Frontend: Next.js
+Blockchain: Solidity
